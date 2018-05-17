@@ -1,29 +1,121 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <el-container>
+      <el-header class="header" v-if="showHeader">
+        <span class="header-logo">互动平台管理系统</span>
+
+        <div class="header-user">
+          超级管理员，你好
+        </div>
+      </el-header>
+      <el-container>
+        <el-aside width="200px" v-if="showAside" class="aside">
+          <el-menu :default-openeds="['1']">
+            <el-submenu index="1">
+              <template slot="title">
+                <span>活动管理</span>
+              </template>
+              <el-menu-item-group>
+                <el-menu-item index="1-1">
+                  <router-link to="/enroll">
+                    报名调研
+                  </router-link>
+                </el-menu-item>
+                <el-menu-item index="1-2">
+                  <router-link to="/vote">
+                    投票评选
+                  </router-link>
+                </el-menu-item>
+              </el-menu-item-group>
+            </el-submenu>
+          </el-menu>
+        </el-aside>
+        <el-main>
+          <router-view @signInMount="signInMount" @signInDestroy="signInDestroy" />
+        </el-main>
+      </el-container>
+    </el-container>
   </div>
 </template>
+<script>
+export default {
+  data() {
+    return {
+      showHeader: true,
+      showAside: true
+    };
+  },
 
-<style lang="less">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
+  methods: {
+    signInMount() {
+      this.showHeader = false;
+      this.showAside = false;
+    },
+    signInDestroy() {
+      this.showHeader = true;
+      this.showAside = true;
     }
   }
+};
+</script>
+
+
+<style lang="less">
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 14px;
+}
+
+.header {
+  border-bottom: 1px solid #e6e6e6;
+  position: relative;
+  line-height: 60px;
+
+  &-logo {
+    height: 100%;
+    font-size: 24px;
+  }
+
+  &-user {
+    position: absolute;
+    right: 15px;
+    top: 0;
+    height: 100%;
+    // line-height: 60px;
+  }
+}
+
+.el-menu-item {
+  padding: 0;
+  a {
+    display: block;
+    color: #333;
+    text-decoration: none;
+  }
+}
+
+.text-center {
+  text-align: center;
+}
+.text-left {
+  text-align: left;
+}
+.text-right {
+  text-align: right;
+}
+
+.table-opt {
+  padding: 0;
+  margin: 5px 0;
+}
+
+.list-top-btns {
+  text-align: right;
+  padding: 10px;
+  border-bottom: 1px solid #e6e6e6;
+  margin-bottom: 10px;
 }
 </style>
