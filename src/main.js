@@ -8,7 +8,7 @@ import ElementUI from 'element-ui';
 Vue.config.productionTip = false
 
 Vue.use(ElementUI);
-new Vue({
+export default new Vue({
   router,
   store,
   render: h => h(App)

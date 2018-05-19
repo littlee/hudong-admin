@@ -1,8 +1,8 @@
 
 <template>
   <div class="enroll-detail">
-    <h1>detail {{id}}</h1>
-    <el-button type="primary">下一步</el-button>
+    <h1>活动已创建</h1>
+    <el-button type="primary" @click="submit">下一步</el-button>
   </div>
 </template>
 
@@ -16,6 +16,11 @@ export default {
   },
   mounted() {
     this.id = this.$route.params.id;
+  },
+  methods: {
+    submit() {
+      this.$router.push('/enroll')
+    }
   }
 };
 </script>

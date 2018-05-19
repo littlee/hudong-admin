@@ -6,7 +6,7 @@ import EnrollConfig from './views/Enroll/EnrollConfig.vue';
 import EnrollDetail from './views/Enroll/EnrollDetail.vue';
 import EnrollLink from './views/Enroll/EnrollLink.vue';
 import EnrollInfo from './views/Enroll/EnrollInfo.vue';
-import Vote from './views/Vote.vue';
+import Vote from './views//Vote/Vote.vue';
 import SignIn from './views/SignIn.vue';
 
 Vue.use(Router);
@@ -32,6 +32,11 @@ export default new Router({
       path: '/enroll-config/:id',
       name: 'enroll-config-edit',
       component: EnrollConfig
+    },
+    {
+      path: '/enroll-detail/create',
+      name: 'enroll-detail-create',
+      component: EnrollDetail
     },
     {
       path: '/enroll-detail/:id',

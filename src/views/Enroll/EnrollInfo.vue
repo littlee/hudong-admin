@@ -11,10 +11,6 @@
       </el-table-column>
       <el-table-column prop="name" label="邮箱地址">
       </el-table-column>
-      <el-table-column prop="name" label="测试选择题">
-      </el-table-column>
-      <el-table-column prop="name" label="排序选择题">
-      </el-table-column>
       <el-table-column fixed="right" label="附件">
         <template slot-scope="scope">
           <a href="#">附件1</a>

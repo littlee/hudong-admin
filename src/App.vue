@@ -6,6 +6,7 @@
 
         <div class="header-user">
           超级管理员，你好
+          <a href="#" @click="clickLogout">退出</a>
         </div>
       </el-header>
       <el-container>
@@ -38,6 +39,8 @@
   </div>
 </template>
 <script>
+import { logout } from '@/api';
+
 export default {
   data() {
     return {
@@ -54,6 +57,12 @@ export default {
     signInDestroy() {
       this.showHeader = true;
       this.showAside = true;
+    },
+
+    clickLogout() {
+      logout().then(res => {
+        this.$router.push('/signin')
+      })
     }
   }
 };

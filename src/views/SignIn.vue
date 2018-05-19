@@ -16,6 +16,9 @@
 </template>
 
 <script>
+import config from '../config';
+import { login } from '@/api';
+
 export default {
   name: 'sign-in',
   data() {
@@ -34,7 +37,18 @@ export default {
   },
   methods: {
     onSubmit() {
-      console.log('submit')
+      this.$refs.form.validate(valid => {
+        if (valid) {
+          login(this.form)
+            .then(res => {
+              this.$router.push('/')
+            })
+            .catch(err => {});
+        } else {
+          console.log('error submit!!');
+          return false;
+        }
+      });
     }
   }
 };
