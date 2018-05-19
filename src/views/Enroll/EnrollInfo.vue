@@ -5,19 +5,21 @@
     </div>
 
     <el-table :data="list" style="width: 100%">
-      <el-table-column prop="name" label="姓名">
+      <el-table-column prop="nickname" label="姓名">
       </el-table-column>
-      <el-table-column prop="name" label="联系方式">
+      <el-table-column label="头像">
+        <template slot-scope="scope">
+          <img :src="scope.row.headimgurl" alt="" width="50" height="50">
+        </template>
       </el-table-column>
-      <el-table-column prop="name" label="邮箱地址">
+      <el-table-column prop="name" label="地区">
+        <template slot-scope="scope">
+          <span>{{scope.row.province + ' ' + scope.row.city}}</span>
+        </template>
       </el-table-column>
       <el-table-column fixed="right" label="附件">
         <template slot-scope="scope">
           <a href="#">附件1</a>
-          <br/>
-          <a href="#">附件2</a>
-          <br/>
-          <a href="#">附件3</a>
         </template>
       </el-table-column>
     </el-table>
@@ -26,16 +28,20 @@
 </template>
 
 <script>
+import { actUserList } from '@/api';
+
 export default {
-  name: 'enroll',
+  name: 'enroll-info',
   data() {
     return {
-      list: [
-        {
-          name: 'xx'
-        }
-      ]
+      list: []
     };
+  },
+  mounted() {
+    actUserList().then(res => {
+      const { arr } = res.data;
+      this.list = arr;
+    });
   }
 };
 </script>

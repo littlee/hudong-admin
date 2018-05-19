@@ -26,7 +26,7 @@ axios.interceptors.response.use(
       console.log(err.message);
     }
     // vm.$message.error(`${JSON.stringify(err)}`);
-    vm.$message.error(`fuck?${err.message}`);
+    vm.$message.error(`??? ${err.message}`);
     return Promise.reject(err);
   }
 );
@@ -51,6 +51,26 @@ export const actList = (page = 1) => {
   });
 };
 
+export const getAct = id => {
+  return axios.get(config.api_prefix + '/collect/activity/get', {
+    params: {
+      id
+    }
+  });
+}
+
 export const createAct = data => {
   return axios.post(config.api_prefix + '/collect/create', data);
-}
+};
+
+export const updateAct = (id, data) => {
+  return axios.post(config.api_prefix + '/collect/update/' + id, data);
+};
+
+export const actUserList = (page = 1) => {
+  return axios.get(config.api_prefix + '/collect/activity/user/list', {
+    params: {
+      page
+    }
+  });
+};

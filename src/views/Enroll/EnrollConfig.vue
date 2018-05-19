@@ -1,7 +1,6 @@
 
 <template>
   <div class="enroll-config">
-    <h1>config {{id}}</h1>
     <el-form ref="form" :model="form">
       <el-form-item label="活动名称" required>
         <el-input v-model="form.name" style="width:400px"></el-input>
@@ -19,14 +18,14 @@
       </el-form-item>
 
       <div>
-        <ImgUpload v-model="form.images_config.home_bg" btnText="添加封面" />
-        <ImgUpload v-model="form.images_config.result_bg" btnText="添加结果页" />
-        <ImgUpload v-model="form.images_config.content_bg" btnText="添加内容页背景" />
+        <ImgUpload v-model="form.images_config.home_bg" btnText="添加封面" :defaultValue="form.images_config.home_bg" />
+        <ImgUpload v-model="form.images_config.result_bg" btnText="添加结果页" :defaultValue="form.images_config.result_bg" />
+        <ImgUpload v-model="form.images_config.content_bg" btnText="添加内容页背景" :defaultValue="form.images_config.content_bg" />
       </div>
       <div>
-        <ImgUpload v-model="form.share_config.icon" btnText="添加分享图标" />
-        <ImgUpload v-model="form.images_config.home_btn" btnText="添加首页按钮" />
-        <ImgUpload v-model="form.images_config.detail_btn" btnText="添加详情页按钮" />
+        <ImgUpload v-model="form.share_config.icon" btnText="添加分享图标" :defaultValue="form.share_config.icon" />
+        <ImgUpload v-model="form.images_config.home_btn" btnText="添加首页按钮" :defaultValue="form.images_config.home_btn" />
+        <ImgUpload v-model="form.images_config.detail_btn" btnText="添加详情页按钮" :defaultValue="form.images_config.detail_btn" />
       </div>
 
       <!-- <el-form-item label="开启附件上传功能">
@@ -53,7 +52,7 @@
 
 <script>
 import ImgUpload from '../../components/ImgUpload.vue';
-import { createAct } from '@/api';
+import { createAct, getAct, updateAct } from '@/api';
 import moment from 'moment';
 
 function formatTime(t) {
@@ -112,6 +111,16 @@ export default {
   },
   mounted() {
     this.id = this.$route.params.id;
+    if (this.id) {
+      getAct(this.id).then(res => {
+        this.form.name = res.data.name;
+        this.form.share_config = res.data.share_config;
+        this.form.images_config = res.data.images_config;
+        this.form.time = [res.data.starttime, res.data.endtime];
+
+        this.form.status = res.data.status;
+      });
+    }
   },
 
   methods: {
@@ -120,16 +129,22 @@ export default {
       this.$refs.form.validate(valid => {
         if (valid) {
           let data = Object.assign({}, this.form);
-          console.log(data);
           data.starttime = formatTime(data.time[0]);
           data.endtime = formatTime(data.time[1]);
           delete data['time'];
           data.questions_config = defaultQuestion;
 
-          createAct(data).then(res => {
-            this.submitting = false;
-            this.$router.push('/enroll-detail/create');
-          });
+          if (this.id) {
+            updateAct(this.id, data).then(res => {
+              this.submitting = false;
+              this.$router.push('/enroll-detail/create');
+            });
+          } else {
+            createAct(data).then(res => {
+              this.submitting = false;
+              this.$router.push('/enroll-detail/create');
+            });
+          }
         } else {
           console.log('error submit!!');
           return false;

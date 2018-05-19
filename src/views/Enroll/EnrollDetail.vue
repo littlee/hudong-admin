@@ -1,7 +1,6 @@
 
 <template>
   <div class="enroll-detail">
-    <h1>活动已创建</h1>
     <el-button type="primary" @click="submit">下一步</el-button>
   </div>
 </template>
