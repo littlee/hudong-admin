@@ -43,10 +43,11 @@ export const getToken = () => {
   return axios.get(config.api_prefix + '/common/getToken');
 };
 
-export const actList = (page = 1) => {
+export const actList = (page = 1, pageSize = 20) => {
   return axios.get(config.api_prefix + '/collect/activity/list', {
     params: {
-      page
+      page,
+      pageSize
     }
   });
 };
@@ -67,10 +68,14 @@ export const updateAct = (id, data) => {
   return axios.post(config.api_prefix + '/collect/update/' + id, data);
 };
 
-export const actUserList = (page = 1) => {
+export const actUserList = (page = 1, pageSize = 20) => {
   return axios.get(config.api_prefix + '/collect/activity/user/list', {
     params: {
-      page
+      page,
+      pageSize
     }
   });
 };
+
+
+// export const channelList = (page)

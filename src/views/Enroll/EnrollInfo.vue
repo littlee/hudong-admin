@@ -19,10 +19,16 @@
       </el-table-column>
       <el-table-column fixed="right" label="附件">
         <template slot-scope="scope">
-          <a href="#">附件1</a>
+          <!-- <a href="#">附件1</a> -->
         </template>
       </el-table-column>
     </el-table>
+
+    <div class="page-wrap">
+      <span>第 {{page}} 页</span>
+      <el-button v-if="page > 1" @click="getData(page - 1)">上一页</el-button>
+      <el-button v-if="hasNextPage" @click="getData(page + 1)">下一页</el-button>
+    </div>
 
   </div>
 </template>
@@ -34,14 +40,30 @@ export default {
   name: 'enroll-info',
   data() {
     return {
+      count: 0,
+      page: 0,
+      pageSize: 0,
       list: []
     };
   },
   mounted() {
-    actUserList().then(res => {
-      const { arr } = res.data;
-      this.list = arr;
-    });
+    this.getData(1);
+  },
+  computed: {
+    hasNextPage() {
+      return this.count > this.pageSize * this.page;
+    }
+  },
+  methods: {
+    getData(page) {
+      actUserList(page).then(res => {
+        const { arr } = res.data;
+        this.list = arr;
+        this.page = res.data.page;
+        this.count = res.data.count;
+        this.pageSize = res.data.pageSize;
+      });
+    }
   }
 };
 </script>

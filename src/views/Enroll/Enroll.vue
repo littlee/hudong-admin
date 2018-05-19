@@ -31,6 +31,12 @@
       </el-table-column>
     </el-table>
 
+    <div class="page-wrap">
+      <span>第 {{page}} 页</span>
+      <el-button v-if="page > 1" @click="getData(page - 1)">上一页</el-button>
+      <el-button v-if="hasNextPage" @click="getData(page + 1)">下一页</el-button>
+    </div>
+
   </div>
 </template>
 
@@ -42,23 +48,38 @@ export default {
   name: 'enroll',
   data() {
     return {
+      count: 0,
+      page: 0,
+      pageSize: 0,
       list: []
     };
   },
+  computed: {
+    hasNextPage() {
+      return this.count > this.pageSize * this.page;
+    }
+  },
   mounted() {
-    actList().then(res => {
-      this.list = res.data.arr.map(item => {
-        return {
-          ...item,
-          starttime: moment(item.starttime).format('YYYY-MM-DD HH:mm:ss'),
-          endtime: moment(item.endtime).format('YYYY-MM-DD HH:mm:ss')
-        };
-      });
-    });
+    this.getData(1);
   },
   methods: {
     createAct() {
       this.$router.push('/enroll-config/create');
+    },
+
+    getData(page) {
+      actList(page).then(res => {
+        this.page = res.data.page;
+        this.count = res.data.count;
+        this.pageSize = res.data.pageSize;
+        this.list = res.data.arr.map(item => {
+          return {
+            ...item,
+            starttime: moment(item.starttime).format('YYYY-MM-DD HH:mm:ss'),
+            endtime: moment(item.endtime).format('YYYY-MM-DD HH:mm:ss')
+          };
+        });
+      });
     }
   }
 };

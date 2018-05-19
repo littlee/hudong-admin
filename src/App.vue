@@ -131,4 +131,12 @@ body {
 .aside {
   border-right: 1px solid #e6e6e6;
 }
+
+.page-wrap {
+  text-align: right;
+  padding: 15px;
+  > span {
+    margin-right: 15px;
+  }
+}
 </style>
