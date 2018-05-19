@@ -83,7 +83,7 @@ export default {
 
             let fileKey = getFileKey();
 
-            ossClient.multipartUpload('object-key', file).then(ossRes => {
+            ossClient.multipartUpload(fileKey, file).then(ossRes => {
               this.uploading = false;
               this.$emit(
                 'input',

@@ -1,0 +1,1 @@
+scp -r ./dist/* root@123.207.75.231:/data/html/plugin/admin/

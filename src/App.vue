@@ -127,4 +127,8 @@ body {
   border-bottom: 1px solid #e6e6e6;
   margin-bottom: 10px;
 }
+
+.aside {
+  border-right: 1px solid #e6e6e6;
+}
 </style>

@@ -42,10 +42,6 @@
         </el-select>
       </el-form-item> -->
 
-      <pre class="red">
-      {{JSON.stringify(this.form, null, 2)}}
-      </pre>
-
       <div class="text-center">
         <el-button type="primary" @click="submit" :disabled="submitting">确认并创建详情页</el-button>
       </div>
