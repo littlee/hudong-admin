@@ -58,7 +58,7 @@ export const getAct = id => {
       id
     }
   });
-}
+};
 
 export const createAct = data => {
   return axios.post(config.api_prefix + '/collect/create', data);
@@ -77,5 +77,21 @@ export const actUserList = (page = 1, pageSize = 20) => {
   });
 };
 
+export const channelList = (page = 1, pageSize = 20) => {
+  return axios.get(config.api_prefix + '/collect/channel/list', {
+    params: {
+      page,
+      pageSize
+    }
+  });
+};
 
-// export const channelList = (page)
+export const createChannel = (data) => {
+  return axios.post(config.api_prefix + '/collect/channel/create', data);
+};
+
+export const updateChannel = (id, data) => {
+  return axios.post(config.api_prefix + '/collect/channel/update/' + id, data);
+};
+
+// export const deleteChannel = 
