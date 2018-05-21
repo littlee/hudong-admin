@@ -68,18 +68,20 @@ export const updateAct = (id, data) => {
   return axios.post(config.api_prefix + '/collect/update/' + id, data);
 };
 
-export const actUserList = (page = 1, pageSize = 20) => {
+export const actUserList = (activity_id, page = 1, pageSize = 20) => {
   return axios.get(config.api_prefix + '/collect/activity/user/list', {
     params: {
+      activity_id,
       page,
       pageSize
     }
   });
 };
 
-export const channelList = (page = 1, pageSize = 20) => {
+export const channelList = (activity_id, page = 1, pageSize = 20) => {
   return axios.get(config.api_prefix + '/collect/channel/list', {
     params: {
+      activity_id,
       page,
       pageSize
     }

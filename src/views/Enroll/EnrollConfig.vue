@@ -79,6 +79,13 @@ const defaultQuestion = [
     type: 'input',
     title: '就读专业',
     required: true
+  },
+  {
+    type: 'extra_file',
+    title: '上传附件',
+    required: true,
+    min_num: 1,
+    max_num: 4
   }
 ];
 

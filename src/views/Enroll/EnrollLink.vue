@@ -50,7 +50,7 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">取 消</el-button>
-        <el-button type="primary" @click="submit" disabled="submitting">确 定</el-button>
+        <el-button type="primary" @click="submit">确 定</el-button>
       </div>
     </el-dialog>
 
@@ -93,7 +93,7 @@ export default {
   },
   methods: {
     getData(page) {
-      channelList(page).then(res => {
+      channelList(this.form.activity_id, page).then(res => {
         this.page = res.data.page;
         this.count = res.data.count;
         this.pageSize = res.data.pageSize;

@@ -19,7 +19,14 @@
       </el-table-column>
       <el-table-column fixed="right" label="附件">
         <template slot-scope="scope">
-          <!-- <a href="#">附件1</a> -->
+          <div v-for="(fo, index) in scope.row.form" :key="`link-block-${index}`" class="file-links">
+            <template v-for="(file, fIdx) in fo.answers">
+              <a :href="file.value" :key="`link-${fIdx}`" target="_blank">
+                {{file.name}}
+              </a>
+              <br :key="`link-br-${fIdx}`" />
+            </template>
+          </div>
         </template>
       </el-table-column>
     </el-table>
@@ -41,6 +48,7 @@ export default {
   name: 'enroll-info',
   data() {
     return {
+      activity_id: null,
       count: 0,
       page: 0,
       pageSize: 0,
@@ -48,6 +56,7 @@ export default {
     };
   },
   mounted() {
+    this.activity_id = this.$route.params.id;
     this.getData(1);
   },
   computed: {
@@ -57,9 +66,16 @@ export default {
   },
   methods: {
     getData(page) {
-      actUserList(page).then(res => {
+      actUserList(this.activity_id, page).then(res => {
         const { arr } = res.data;
-        this.list = arr;
+        this.list = arr.map(item => {
+          return {
+            ...item,
+            form: item.form.filter(fo => {
+              return fo.type === 'extra_file';
+            })
+          };
+        });
         this.page = res.data.page;
         this.count = res.data.count;
         this.pageSize = res.data.pageSize;
@@ -67,7 +83,7 @@ export default {
     },
 
     download() {
-      window.location = config.api_prefix + '/collect/activity/user/download'
+      window.location = config.api_prefix + '/collect/activity/user/download';
     }
   }
 };
