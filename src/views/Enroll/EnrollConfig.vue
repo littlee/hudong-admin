@@ -84,8 +84,8 @@ const defaultQuestion = [
     type: 'extra_file',
     title: '上传附件',
     required: true,
-    min_num: 1,
-    max_num: 4
+    min_num: 2,
+    max_num: 3
   }
 ];
 
