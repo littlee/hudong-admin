@@ -1,7 +1,7 @@
 <template>
   <div class="enroll">
     <div class="list-top-btns">
-      <el-button type="primary">下载报名信息</el-button>
+      <el-button type="primary" @click="download">下载报名信息</el-button>
     </div>
 
     <el-table :data="list" style="width: 100%">
@@ -35,6 +35,7 @@
 
 <script>
 import { actUserList } from '@/api';
+import config from '@/config';
 
 export default {
   name: 'enroll-info',
@@ -63,6 +64,10 @@ export default {
         this.count = res.data.count;
         this.pageSize = res.data.pageSize;
       });
+    },
+
+    download() {
+      window.location = config.api_prefix + '/collect/activity/user/download'
     }
   }
 };

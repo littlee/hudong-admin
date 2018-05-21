@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <el-container>
+    <el-container style="min-height:100%">
       <el-header class="header" v-if="showHeader">
         <span class="header-logo">互动平台管理系统</span>
 
@@ -61,8 +61,8 @@ export default {
 
     clickLogout() {
       logout().then(res => {
-        this.$router.push('/signin')
-      })
+        this.$router.push('/signin');
+      });
     }
   }
 };
@@ -72,6 +72,14 @@ export default {
 <style lang="less">
 * {
   box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+#app {
+  height: 100%;
 }
 
 body {
@@ -138,5 +146,13 @@ body {
   > span {
     margin-right: 15px;
   }
+}
+
+.el-menu {
+  border-right: none;
+}
+
+.hide {
+  display: none !important;
 }
 </style>

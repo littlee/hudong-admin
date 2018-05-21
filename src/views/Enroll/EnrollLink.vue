@@ -26,7 +26,7 @@
       </el-table-column>
       <el-table-column fixed="right" label="操作">
         <template slot-scope="scope">
-          <el-button type="danger" size="small">
+          <el-button type="danger" size="small" @click="del(scope.row)" disabled="submitting">
             删除
           </el-button>
         </template>
@@ -50,7 +50,7 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">取 消</el-button>
-        <el-button type="primary" @click="submit">确 定</el-button>
+        <el-button type="primary" @click="submit" disabled="submitting">确 定</el-button>
       </div>
     </el-dialog>
 
@@ -58,12 +58,18 @@
 </template>
 
 <script>
-import { channelList, updateChannel, createChannel } from '@/api';
+import {
+  channelList,
+  updateChannel,
+  createChannel,
+  deleteChannel
+} from '@/api';
 
 export default {
   name: 'enroll-link',
   data() {
     return {
+      submitting: false,
       dialogFormVisible: false,
       count: 0,
       page: 0,
@@ -118,16 +124,32 @@ export default {
       this.$refs.form.validate(valid => {
         if (valid) {
           let data = Object.assign({}, this.form);
-          createChannel(data).then(res => {
-            this.submitting = false;
-            this.dialogFormVisible = false;
-            this.getData(1);
-          });
+          createChannel(data)
+            .then(res => {
+              this.submitting = false;
+              this.dialogFormVisible = false;
+              this.getData(1);
+            })
+            .catch(err => {
+              this.submitting = false;
+            });
         } else {
           console.log('error submit!!');
           return false;
         }
       });
+    },
+
+    del(row) {
+      this.submitting = true;
+      deleteChannel(row.id)
+        .then(res => {
+          this.submitting = false;
+          this.getData(this.page);
+        })
+        .catch(err => {
+          this.submitting = false;
+        });
     }
   }
 };

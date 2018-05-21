@@ -86,7 +86,7 @@ export const channelList = (page = 1, pageSize = 20) => {
   });
 };
 
-export const createChannel = (data) => {
+export const createChannel = data => {
   return axios.post(config.api_prefix + '/collect/channel/create', data);
 };
 
@@ -94,4 +94,6 @@ export const updateChannel = (id, data) => {
   return axios.post(config.api_prefix + '/collect/channel/update/' + id, data);
 };
 
-// export const deleteChannel = 
+export const deleteChannel = id => {
+  return axios.post(config.api_prefix + '/collect/channel/del/' + id);
+};

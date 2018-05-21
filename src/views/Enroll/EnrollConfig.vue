@@ -138,11 +138,15 @@ export default {
             updateAct(this.id, data).then(res => {
               this.submitting = false;
               this.$router.push('/enroll-detail/create');
+            }).catch(err => {
+              this.submitting = false;
             });
           } else {
             createAct(data).then(res => {
               this.submitting = false;
               this.$router.push('/enroll-detail/create');
+            }).catch(err => {
+              this.submitting = false;
             });
           }
         } else {
