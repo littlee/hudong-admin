@@ -83,7 +83,7 @@ export default {
     },
 
     download() {
-      window.location = config.api_prefix + '/collect/activity/user/download';
+      window.location = config.api_prefix + '/collect/activity/user/download?activity_id=' + this.activity_id;
     }
   }
 };
