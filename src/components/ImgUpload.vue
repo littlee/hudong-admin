@@ -14,7 +14,7 @@ import { getToken } from '@/api';
 import shortid from 'shortid';
 
 function getFileKey() {
-  return '/hudong/' + shortid.generate() + '' + Date.now();
+  return 'hudong/' + shortid.generate() + '' + Date.now();
 }
 
 export default {
