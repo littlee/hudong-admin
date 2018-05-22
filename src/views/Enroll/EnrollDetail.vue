@@ -6,7 +6,7 @@
 
     <el-row>
       <el-col :span="10">
-        <iframe ref="preFrame" id="pre-iframe" class="preview-iframe" src="http://localhost:3000/?mock=1&editMode=1&page=Detail" frameborder="0" width="375" height="603" @load="iframeLoad"></iframe>
+        <iframe ref="preFrame" id="pre-iframe" class="preview-iframe" src="http://plugin.dyyz1993.cn/h5/answer/?editMode=1&page=Detail" frameborder="0" width="375" height="603" @load="iframeLoad"></iframe>
       </el-col>
       <el-col :span="13">
         <div class="qu-add">
