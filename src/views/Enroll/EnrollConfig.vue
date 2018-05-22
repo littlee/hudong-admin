@@ -17,29 +17,16 @@
         </el-date-picker>
       </el-form-item>
 
-      <div>
+      <div class="upload-row">
         <ImgUpload v-model="form.images_config.home_bg" btnText="添加封面" :defaultValue="form.images_config.home_bg" />
         <ImgUpload v-model="form.images_config.result_bg" btnText="添加结果页" :defaultValue="form.images_config.result_bg" />
         <ImgUpload v-model="form.images_config.content_bg" btnText="添加内容页背景" :defaultValue="form.images_config.content_bg" />
       </div>
-      <div>
+      <div class="upload-row">
         <ImgUpload v-model="form.share_config.icon" btnText="添加分享图标" :defaultValue="form.share_config.icon" />
         <ImgUpload v-model="form.images_config.home_btn" btnText="添加首页按钮" :defaultValue="form.images_config.home_btn" />
         <ImgUpload v-model="form.images_config.detail_btn" btnText="添加详情页按钮" :defaultValue="form.images_config.detail_btn" />
       </div>
-
-      <!-- <el-form-item label="开启附件上传功能">
-        <el-switch v-model="form.enableUpload" active-color="#13ce66">
-        </el-switch>
-      </el-form-item>
-
-      <el-form-item label="允许用户上传附件数量">
-        <el-select v-model="form.anme" placeholder="请选择">
-          <el-option :value="1">1</el-option>
-          <el-option :value="2">2</el-option>
-          <el-option :value="3">3</el-option>
-        </el-select>
-      </el-form-item> -->
 
       <div class="text-center">
         <el-button type="primary" @click="submit" :disabled="submitting">确认并创建详情页</el-button>
@@ -54,6 +41,7 @@
 import ImgUpload from '../../components/ImgUpload.vue';
 import { createAct, getAct, updateAct } from '@/api';
 import moment from 'moment';
+const configKey = 'hudong_config';
 
 function formatTime(t) {
   return moment(t).format('YYYY-MM-DD HH:mm:ss');
@@ -140,23 +128,15 @@ export default {
           data.endtime = formatTime(data.time[1]);
           delete data['time'];
           data.questions_config = defaultQuestion;
-
+          localStorage.setItem(configKey, JSON.stringify(data));
           if (this.id) {
-            updateAct(this.id, data).then(res => {
-              this.submitting = false;
-              this.$router.push('/enroll-detail/create');
-            }).catch(err => {
-              this.submitting = false;
-            });
-          } else {
-            createAct(data).then(res => {
-              this.submitting = false;
-              this.$router.push('/enroll-detail/create');
-            }).catch(err => {
-              this.submitting = false;
-            });
+            this.$router.push('/enroll-detail/' + this.id);
+          }
+          else {
+            this.$router.push('/enroll-detail/create');
           }
         } else {
+          this.submitting = false;
           console.log('error submit!!');
           return false;
         }
@@ -167,6 +147,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.upload-row {
+  margin-bottom: 15px;
+}
 </style>
 
 

@@ -84,6 +84,7 @@ html, body {
 
 body {
   font-size: 14px;
+  min-width: 1200px;
 }
 
 .header {
@@ -138,6 +139,7 @@ body {
 
 .aside {
   border-right: 1px solid #e6e6e6;
+  overflow-x: hidden;
 }
 
 .page-wrap {
@@ -154,5 +156,13 @@ body {
 
 .hide {
   display: none !important;
+}
+
+.pull-left {
+  float: left;
+}
+
+.pull-right {
+  float: right;
 }
 </style>

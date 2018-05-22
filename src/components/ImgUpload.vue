@@ -1,11 +1,13 @@
 <template>
   <div class="img-upload">
-    <div class="blank">
+    <div class="blank" :style="`width:${size}px;height:${size}px;`" @click="_clickFileInput">
+      <span v-if="!hasBtn && !image" :style="`line-height:${size}px`">添加图片</span>
       <img :src="image" alt="" v-if="image" :style="`opacity:${uploading?'0.5': '1'}`">
+      <span class="clear" @click.stop="clear" v-if="hasClear && image"></span>
     </div>
     <input type="file" @change="_fileChange" class="file-input" ref="fileInput" accept="image/*">
 
-    <el-button @click="_clickFileInput">{{uploading ? '上传中...' : btnText}}</el-button>
+    <el-button v-if="hasBtn" @click="_clickFileInput" :size="btnSize">{{uploading ? '上传中...' : btnText}}</el-button>
   </div>
 </template>
 <script>
@@ -30,6 +32,22 @@ export default {
     btnText: {
       type: String,
       default: '选择图片'
+    },
+    btnSize: {
+      type: String,
+      default: ''
+    },
+    hasClear: {
+      type: Boolean,
+      default: false
+    },
+    size: {
+      type: Number,
+      default: 200
+    },
+    hasBtn: {
+      type: Boolean,
+      default: true
     }
   },
 
@@ -101,6 +119,11 @@ export default {
         return;
       }
       this.$refs.fileInput.click();
+    },
+
+    clear() {
+      this.image = '';
+      this.$emit('input', '');
     }
   }
 };
@@ -109,7 +132,7 @@ export default {
 .img-upload {
   text-align: center;
   display: inline-block;
-  margin-bottom: 10px;
+  // margin-bottom: 10px;
 }
 
 .file-input {
@@ -125,7 +148,8 @@ export default {
   position: relative;
   box-sizing: border-box;
   background-color: white;
-  margin-bottom: 10px;
+  margin-bottom: 5%;
+  cursor: pointer;
 
   > img {
     max-width: 90%;
@@ -136,6 +160,35 @@ export default {
     bottom: 0;
     right: 0;
     margin: auto;
+  }
+}
+
+.clear {
+  position: absolute;
+  color: white;
+  font-size: 2em;
+  top: -0.3em;
+  right: -0.3em;
+  background-color: #f44336;
+  width: 1em;
+  height: 1em;
+  line-height: 1em;
+  text-align: center;
+  border-radius: 50%;
+  cursor: pointer;
+
+  &:before {
+    content: '';
+    width: 0.5em;
+    height: 0.1em;
+    background-color: white;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    display: block;
+    position: absolute;
   }
 }
 </style>
