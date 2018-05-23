@@ -97,5 +97,5 @@ export const updateChannel = (id, data) => {
 };
 
 export const deleteChannel = id => {
-  return axios.post(config.api_prefix + '/collect/channel/del/' + id);
+  return axios.delete(config.api_prefix + '/collect/channel/del/' + id);
 };

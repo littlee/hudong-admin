@@ -26,7 +26,7 @@
       </el-table-column>
       <el-table-column fixed="right" label="操作">
         <template slot-scope="scope">
-          <el-button type="danger" size="small" @click="del(scope.row)" disabled="submitting">
+          <el-button type="danger" size="small" @click="del(scope.row)" :disabled="submitting">
             删除
           </el-button>
         </template>
