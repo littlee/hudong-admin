@@ -41,7 +41,7 @@
 import ImgUpload from '../../components/ImgUpload.vue';
 import { createAct, getAct, updateAct } from '@/api';
 import moment from 'moment';
-const configKey = 'hudong_config';
+import config from '@/config';
 
 function formatTime(t) {
   return moment(t).format('YYYY-MM-DD HH:mm:ss');
@@ -128,7 +128,7 @@ export default {
           data.endtime = formatTime(data.time[1]);
           delete data['time'];
           data.questions_config = defaultQuestion;
-          localStorage.setItem(configKey, JSON.stringify(data));
+          localStorage.setItem(config.config_data_key, JSON.stringify(data));
           if (this.id) {
             this.$router.push('/enroll-detail/' + this.id);
           }

@@ -6,7 +6,7 @@
 
     <el-row>
       <el-col :span="10">
-        <iframe ref="preFrame" id="pre-iframe" class="preview-iframe" src="http://plugin.dyyz1993.cn/h5/answer/?editMode=1&page=Detail" frameborder="0" width="375" height="603" @load="iframeLoad"></iframe>
+        <iframe ref="preFrame" id="pre-iframe" class="preview-iframe" :src="`${previewUrl}?editMode=1&page=Detail`" frameborder="0" width="375" height="603" @load="iframeLoad"></iframe>
       </el-col>
       <el-col :span="13">
         <div class="qu-add">
@@ -120,7 +120,7 @@
 
 <script>
 import ImgUpload from '../../components/ImgUpload.vue';
-const configKey = 'hudong_config';
+import config from '@/config';
 import { createAct, updateAct } from '@/api';
 
 function arrayMove(arr, oldIndex, newIndex) {
@@ -139,6 +139,7 @@ export default {
   data() {
     return {
       id: '',
+      previewUrl: config.preview_url,
       submitting: false,
       addType: 'input',
       typeMap: {
@@ -153,9 +154,9 @@ export default {
   },
   mounted() {
     this.id = this.$route.params.id;
-    if (localStorage.getItem(configKey)) {
+    if (localStorage.getItem(config.config_data_key)) {
       this.questions_config = JSON.parse(
-        localStorage.getItem(configKey)
+        localStorage.getItem(config.config_data_key)
       ).questions_config;
     }
   },
@@ -163,7 +164,7 @@ export default {
     submit() {
 
       this.submitting = true;
-      let data = JSON.parse(localStorage.getItem(configKey))
+      let data = JSON.parse(localStorage.getItem(config.config_data_key))
       data.questions_config = this.questions_config;
     
       if (this.id) {
@@ -183,8 +184,8 @@ export default {
       }
     },
     iframeLoad() {
-      if (localStorage.getItem(configKey)) {
-        const configData = JSON.parse(localStorage.getItem(configKey));
+      if (localStorage.getItem(config.config_data_key)) {
+        const configData = JSON.parse(localStorage.getItem(config.config_data_key));
         this.sendMsg(configData);
       } else {
         console.log('go to config');
