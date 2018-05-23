@@ -209,9 +209,13 @@ export default {
     },
 
     add() {
-      this.questions_config = this.questions_config.concat({
+      let newQu = {
         type: this.addType
-      });
+      };
+      if (this.addType === 'single_choose' || this.addType === 'multi_choose' || this.addType === 'sort') {
+        newQu.options = []
+      }
+      this.questions_config = this.questions_config.concat(newQu);
     },
 
     moveUp(index) {
