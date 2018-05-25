@@ -210,7 +210,8 @@ export default {
 
     add() {
       let newQu = {
-        type: this.addType
+        type: this.addType,
+        required: false
       };
       if (this.addType === 'single_choose' || this.addType === 'multi_choose' || this.addType === 'sort') {
         newQu.options = []
