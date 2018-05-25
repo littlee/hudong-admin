@@ -112,7 +112,7 @@ export default {
         this.form.share_config = res.data.share_config;
         this.form.images_config = res.data.images_config;
         this.form.time = [res.data.starttime, res.data.endtime];
-
+        this.form.questions_config = res.data.questions_config;
         this.form.status = res.data.status;
       });
     }
@@ -127,8 +127,13 @@ export default {
           data.starttime = formatTime(data.time[0]);
           data.endtime = formatTime(data.time[1]);
           delete data['time'];
-          data.questions_config = defaultQuestion;
+          if (!this.id) {
+            data.questions_config = defaultQuestion;
+          }
+
           localStorage.setItem(config.config_data_key, JSON.stringify(data));
+
+          
           if (this.id) {
             this.$router.push('/enroll-detail/' + this.id);
           }

@@ -35,7 +35,7 @@
               
               <el-col :span="12">
                 <el-form-item label="图片描述：">
-                  <ImgUpload v-model="qu.imageurl" hasClear :size="120" :hasBtn="false" />
+                  <ImgUpload v-model="qu.imageurl" :defaultValue="qu.imageurl" hasClear :size="120" :hasBtn="false" />
                 </el-form-item>
               </el-col>
               <el-col :span="12">
