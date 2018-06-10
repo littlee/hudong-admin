@@ -1078,7 +1078,7 @@ body .markdown-body
 <td>page</td>
 <td>number</td>
 <td>query</td>
-<td>true</td>
+<td>false</td>
 <td></td>
 <td></td>
 <td></td>
@@ -1126,11 +1126,90 @@ body .markdown-body
 </tr>
 </tbody>
 </table>
-<h1 id="_4">创建活动<a class="headerlink" href="#_4" title="Permanent link"></a></h1>
+<h1 id="_4">获取该活动的投票用户列表<a class="headerlink" href="#_4" title="Permanent link"></a></h1>
+<blockquote>
+<p>GET /activity/user/list</p>
+</blockquote>
+<h3 id="_5">请求参数<a class="headerlink" href="#_5" title="Permanent link"></a></h3>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>方法体</th>
+<th>是否必填</th>
+<th>规则</th>
+<th>说明</th>
+<th>所属</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>page</td>
+<td>number</td>
+<td>query</td>
+<td>false</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>pageSize</td>
+<td>number</td>
+<td>query</td>
+<td>false</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>activity_id</td>
+<td>number</td>
+<td>query</td>
+<td>true</td>
+<td></td>
+<td>活动id</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="_6">输出参数<a class="headerlink" href="#_6" title="Permanent link"></a></h3>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>arr</td>
+<td>array</td>
+<td></td>
+</tr>
+<tr>
+<td>page</td>
+<td>number</td>
+<td></td>
+</tr>
+<tr>
+<td>pageSize</td>
+<td>number</td>
+<td></td>
+</tr>
+<tr>
+<td>count</td>
+<td>number</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h1 id="_7">创建活动<a class="headerlink" href="#_7" title="Permanent link"></a></h1>
 <blockquote>
 <p>POST /create</p>
 </blockquote>
-<h3 id="_5">请求参数<a class="headerlink" href="#_5" title="Permanent link"></a></h3>
+<h3 id="_8">请求参数<a class="headerlink" href="#_8" title="Permanent link"></a></h3>
 <table>
 <thead>
 <tr>
@@ -1410,11 +1489,11 @@ body .markdown-body
 </tr>
 </tbody>
 </table>
-<h1 id="_6">获取单个活动信息<a class="headerlink" href="#_6" title="Permanent link"></a></h1>
+<h1 id="_9">获取单个活动信息<a class="headerlink" href="#_9" title="Permanent link"></a></h1>
 <blockquote>
 <p>GET /activity/get</p>
 </blockquote>
-<h3 id="_7">请求参数<a class="headerlink" href="#_7" title="Permanent link"></a></h3>
+<h3 id="_10">请求参数<a class="headerlink" href="#_10" title="Permanent link"></a></h3>
 <table>
 <thead>
 <tr>
@@ -1432,14 +1511,14 @@ body .markdown-body
 <td>id</td>
 <td>any</td>
 <td>query</td>
-<td>false</td>
+<td>true</td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
 </tbody>
 </table>
-<h3 id="_8">输出参数<a class="headerlink" href="#_8" title="Permanent link"></a></h3>
+<h3 id="_11">输出参数<a class="headerlink" href="#_11" title="Permanent link"></a></h3>
 <table>
 <thead>
 <tr>
@@ -1612,11 +1691,11 @@ body .markdown-body
 </tr>
 </tbody>
 </table>
-<h1 id="_9">更新活动<a class="headerlink" href="#_9" title="Permanent link"></a></h1>
+<h1 id="_12">更新活动<a class="headerlink" href="#_12" title="Permanent link"></a></h1>
 <blockquote>
 <p>POST /update/:id</p>
 </blockquote>
-<h3 id="_10">请求参数<a class="headerlink" href="#_10" title="Permanent link"></a></h3>
+<h3 id="_13">请求参数<a class="headerlink" href="#_13" title="Permanent link"></a></h3>
 <table>
 <thead>
 <tr>
@@ -1901,6 +1980,176 @@ body .markdown-body
 <td>true</td>
 <td></td>
 <td>新增加票数</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h1 id="_14">创建渠道<a class="headerlink" href="#_14" title="Permanent link"></a></h1>
+<blockquote>
+<p>POST /channel/create</p>
+</blockquote>
+<h3 id="_15">请求参数<a class="headerlink" href="#_15" title="Permanent link"></a></h3>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>方法体</th>
+<th>是否必填</th>
+<th>规则</th>
+<th>说明</th>
+<th>所属</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>activity_id</td>
+<td>any</td>
+<td>body</td>
+<td>true</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>body</td>
+<td>true</td>
+<td></td>
+<td>渠道名称</td>
+<td></td>
+</tr>
+<tr>
+<td>remark</td>
+<td>string</td>
+<td>body</td>
+<td>false</td>
+<td></td>
+<td>备注</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h1 id="_16">更新渠道<a class="headerlink" href="#_16" title="Permanent link"></a></h1>
+<blockquote>
+<p>POST /channel/update/:id</p>
+</blockquote>
+<h3 id="_17">请求参数<a class="headerlink" href="#_17" title="Permanent link"></a></h3>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>方法体</th>
+<th>是否必填</th>
+<th>规则</th>
+<th>说明</th>
+<th>所属</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>body</td>
+<td>true</td>
+<td></td>
+<td>渠道名称</td>
+<td></td>
+</tr>
+<tr>
+<td>remark</td>
+<td>string</td>
+<td>body</td>
+<td>false</td>
+<td></td>
+<td>备注</td>
+<td></td>
+</tr>
+<tr>
+<td>id</td>
+<td>any</td>
+<td>params</td>
+<td>true</td>
+<td></td>
+<td>渠道id</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h1 id="_18">获取渠道列表<a class="headerlink" href="#_18" title="Permanent link"></a></h1>
+<blockquote>
+<p>GET /channel/list</p>
+</blockquote>
+<h3 id="_19">请求参数<a class="headerlink" href="#_19" title="Permanent link"></a></h3>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>方法体</th>
+<th>是否必填</th>
+<th>规则</th>
+<th>说明</th>
+<th>所属</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>activity_id</td>
+<td>any</td>
+<td>query</td>
+<td>true</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>page</td>
+<td>number</td>
+<td>query</td>
+<td>true</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>pageSize</td>
+<td>number</td>
+<td>query</td>
+<td>false</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h1 id="_20">删除渠道<a class="headerlink" href="#_20" title="Permanent link"></a></h1>
+<blockquote>
+<p>DELETE /channel/del/:id</p>
+</blockquote>
+<h3 id="_21">请求参数<a class="headerlink" href="#_21" title="Permanent link"></a></h3>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>方法体</th>
+<th>是否必填</th>
+<th>规则</th>
+<th>说明</th>
+<th>所属</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>any</td>
+<td>params</td>
+<td>true</td>
+<td></td>
+<td></td>
 <td></td>
 </tr>
 </tbody>

@@ -8,8 +8,29 @@
 
 参数名 | 类型 | 方法体 | 是否必填 | 规则 | 说明 | 所属
 --- | --- | --- | --- | --- | --- | ---
-page | number | query | true |  |  | 
+page | number | query | false |  |  | 
 pageSize | number | query | false |  |  | 
+
+### 输出参数
+
+参数名 | 类型 | 说明
+--- | --- | ---
+arr | array | 
+page | number | 
+pageSize | number | 
+count | number | 
+
+# 获取该活动的投票用户列表
+
+> GET /activity/user/list
+
+### 请求参数
+
+参数名 | 类型 | 方法体 | 是否必填 | 规则 | 说明 | 所属
+--- | --- | --- | --- | --- | --- | ---
+page | number | query | false |  |  | 
+pageSize | number | query | false |  |  | 
+activity_id | number | query | true |  | 活动id | 
 
 ### 输出参数
 
@@ -76,7 +97,7 @@ add_vote_num | number | body | true |  | 新增加票数 |
 
 参数名 | 类型 | 方法体 | 是否必填 | 规则 | 说明 | 所属
 --- | --- | --- | --- | --- | --- | ---
-id | any | query | false |  |  | 
+id | any | query | true |  |  | 
 
 ### 输出参数
 
@@ -171,3 +192,49 @@ imageurl | string | body | false |  | 图片链接 |
 isdel | number | body | false |  | 是否删除该选项 | 
 vote_num | number | body | false |  | 用户投票数,不能直接修改 | 
 add_vote_num | number | body | true |  | 新增加票数 | 
+
+# 创建渠道
+
+> POST /channel/create
+
+### 请求参数
+
+参数名 | 类型 | 方法体 | 是否必填 | 规则 | 说明 | 所属
+--- | --- | --- | --- | --- | --- | ---
+activity_id | any | body | true |  |  | 
+name | string | body | true |  | 渠道名称 | 
+remark | string | body | false |  | 备注 | 
+
+# 更新渠道
+
+> POST /channel/update/:id
+
+### 请求参数
+
+参数名 | 类型 | 方法体 | 是否必填 | 规则 | 说明 | 所属
+--- | --- | --- | --- | --- | --- | ---
+name | string | body | true |  | 渠道名称 | 
+remark | string | body | false |  | 备注 | 
+id | any | params | true |  | 渠道id | 
+
+# 获取渠道列表
+
+> GET /channel/list
+
+### 请求参数
+
+参数名 | 类型 | 方法体 | 是否必填 | 规则 | 说明 | 所属
+--- | --- | --- | --- | --- | --- | ---
+activity_id | any | query | true |  |  | 
+page | number | query | true |  |  | 
+pageSize | number | query | false |  |  | 
+
+# 删除渠道
+
+> DELETE /channel/del/:id
+
+### 请求参数
+
+参数名 | 类型 | 方法体 | 是否必填 | 规则 | 说明 | 所属
+--- | --- | --- | --- | --- | --- | ---
+id | any | params | true |  |  | 
