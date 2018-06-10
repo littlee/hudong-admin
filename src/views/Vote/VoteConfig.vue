@@ -60,7 +60,8 @@ function formatTime(t) {
 const defaultQuestion = [
   {
     title: '标题',
-    vote_num: 0
+    vote_num: 0,
+    add_vote_num: 0
   }
 ];
 

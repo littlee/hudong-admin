@@ -31,13 +31,11 @@
             <el-form-item label="图片描述：">
               <ImgUpload v-model="qu.imageurl" :defaultValue="qu.imageurl" hasClear :size="120" :hasBtn="false" />
             </el-form-item>
-            <el-form-item label="用户投票数：" label-width="7em">
-              <el-input v-model="qu.vote_num" readonly></el-input>
-            </el-form-item>
             <el-form-item label="新增投票数：" label-width="7em">
               <el-input v-model="qu.add_vote_num"></el-input>
             </el-form-item>
-            <span>总票数：{{parseInt(qu.vote_num) + parseInt(qu.add_vote_num)}}</span>
+            <div class="form-text">用户投票数：{{qu.vote_num}}</div>
+            <div class="form-text">总票数：{{parseInt(qu.vote_num) + parseInt(qu.add_vote_num)}}</div>
           </el-form>
 
           <div class="qu-block-opt">
@@ -158,18 +156,11 @@ export default {
     },
 
     add() {
-      let newQu = {
-        type: this.addType,
-        required: false
-      };
-      if (
-        this.addType === 'single_choose' ||
-        this.addType === 'multi_choose' ||
-        this.addType === 'sort'
-      ) {
-        newQu.options = [];
-      }
-      this.questions_config = this.questions_config.concat(newQu);
+      this.questions_config = this.questions_config.concat({
+        title: '标题',
+        vote_num: 0,
+        add_vote_num: 0
+      });
     },
 
     moveUp(index) {
@@ -278,5 +269,9 @@ export default {
   border-bottom: 1px solid #ddd;
   margin-bottom: 15px;
   text-align: right;
+}
+
+.form-text {
+  margin: 10px 0;
 }
 </style>
