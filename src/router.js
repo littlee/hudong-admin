@@ -10,6 +10,7 @@ import Vote from './views//Vote/Vote.vue';
 import VoteConfig from './views/Vote/VoteConfig.vue';
 import VoteDetail from './views/Vote/VoteDetail.vue';
 import VoteLink from './views/Vote/VoteLink.vue';
+import VoteInfo from './views/Vote/VoteInfo.vue';
 import SignIn from './views/SignIn.vue';
 
 Vue.use(Router);
@@ -90,9 +91,9 @@ export default new Router({
       component: VoteLink
     },
     {
-      path: '/vote-info1/:id',
+      path: '/vote-info/:id',
       name: 'vote-info',
-      component: EnrollInfo
+      component: VoteInfo
     },
     // 登录
     {

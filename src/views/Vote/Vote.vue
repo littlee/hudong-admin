@@ -26,7 +26,7 @@
           <br/>
           <router-link :to="`/vote-link/${scope.row.id}`">链接管理</router-link>
           <br/>
-          <router-link :to="`/vote-info/${scope.row.id}`">报名信息</router-link>
+          <router-link :to="`/vote-info/${scope.row.id}`">投票用户</router-link>
         </template>
       </el-table-column>
     </el-table>
