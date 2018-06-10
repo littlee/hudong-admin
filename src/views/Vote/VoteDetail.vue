@@ -19,7 +19,7 @@
           </el-button>
         </div>
 
-        <div v-for="(qu, index) in questions_config" :key="`qu-${index}`" class="qu-block">
+        <div v-for="(qu, index) in not_del_questions_config" :key="`qu-${index}`" class="qu-block">
           <div class="qu-type">第 {{index + 1}} 个</div>
           <el-form>
             <el-form-item label="标题：" label-width="4em">
@@ -30,9 +30,6 @@
             </el-form-item>
             <el-form-item label="图片描述：">
               <ImgUpload v-model="qu.imageurl" :defaultValue="qu.imageurl" hasClear :size="120" :hasBtn="false" />
-            </el-form-item>
-            <el-form-item label="是否删除：">
-              <el-checkbox v-model="qu.isdel">删除</el-checkbox>
             </el-form-item>
             <el-form-item label="用户投票数：" label-width="7em">
               <el-input v-model="qu.vote_num" readonly></el-input>
@@ -48,7 +45,7 @@
               <el-button size="small" type="primary" v-if="index !== 0" title="上移" @click="moveUp(index)">
                 <i class="el-icon-upload2"></i>
               </el-button>
-              <el-button size="small" type="primary" v-if="index !== questions_config.length - 1" title="下移" @click="moveDown(index)">
+              <el-button size="small" type="primary" v-if="index !== not_del_questions_config.length - 1" title="下移" @click="moveDown(index)">
                 <i class="el-icon-download"></i>
               </el-button>
               <el-button size="small" type="danger" title="删除" @click="remove(index)">
@@ -92,6 +89,12 @@ export default {
       submitting: false,
       questions_config: []
     };
+  },
+
+  computed: {
+    not_del_questions_config: function() {
+      return this.questions_config.filter(item => item.isdel !== 1);
+    }
   },
   mounted() {
     this.id = this.$route.params.id;
@@ -140,7 +143,7 @@ export default {
 
     preview() {
       const configData = {
-        questions_config: this.questions_config
+        questions_config: this.not_del_questions_config
       };
       this.sendMsg(configData);
     },
@@ -186,8 +189,14 @@ export default {
     },
 
     remove(rmIndex) {
-      this.questions_config = this.questions_config.filter((item, index) => {
-        return index !== rmIndex;
+      this.questions_config = this.questions_config.map((item, index) => {
+        if (index === rmIndex) {
+          return {
+            ...item,
+            isdel: 1
+          };
+        }
+        return item;
       });
     },
 

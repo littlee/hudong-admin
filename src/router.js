@@ -9,6 +9,7 @@ import EnrollInfo from './views/Enroll/EnrollInfo.vue';
 import Vote from './views//Vote/Vote.vue';
 import VoteConfig from './views/Vote/VoteConfig.vue';
 import VoteDetail from './views/Vote/VoteDetail.vue';
+import VoteLink from './views/Vote/VoteLink.vue';
 import SignIn from './views/SignIn.vue';
 
 Vue.use(Router);
@@ -82,6 +83,16 @@ export default new Router({
       path: '/vote-detail/:id',
       name: 'vote-detail-edit',
       component: VoteDetail
+    },
+    {
+      path: '/vote-link/:id',
+      name: 'vote-link',
+      component: VoteLink
+    },
+    {
+      path: '/vote-info1/:id',
+      name: 'vote-info',
+      component: EnrollInfo
     },
     // 登录
     {

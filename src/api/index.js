@@ -68,7 +68,12 @@ export const updateAct = (id, data, type = 'collect') => {
   return axios.post(`${config.api_prefix}/${type}/update/${id}`, data);
 };
 
-export const actUserList = (activity_id, page = 1, pageSize = 20, type = 'collect') => {
+export const actUserList = (
+  activity_id,
+  page = 1,
+  pageSize = 20,
+  type = 'collect'
+) => {
   return axios.get(`${config.api_prefix}/${type}/activity/user/list`, {
     params: {
       activity_id,
@@ -78,8 +83,13 @@ export const actUserList = (activity_id, page = 1, pageSize = 20, type = 'collec
   });
 };
 
-export const channelList = (activity_id, page = 1, pageSize = 20) => {
-  return axios.get(config.api_prefix + '/collect/channel/list', {
+export const channelList = (
+  activity_id,
+  page = 1,
+  pageSize = 20,
+  type = 'collect'
+) => {
+  return axios.get(`${config.api_prefix}/${type}/channel/list`, {
     params: {
       activity_id,
       page,
@@ -88,14 +98,14 @@ export const channelList = (activity_id, page = 1, pageSize = 20) => {
   });
 };
 
-export const createChannel = data => {
-  return axios.post(config.api_prefix + '/collect/channel/create', data);
+export const createChannel = (data, type = 'collect') => {
+  return axios.post(`${config.api_prefix}/${type}/channel/create`, data);
 };
 
-export const updateChannel = (id, data) => {
-  return axios.post(config.api_prefix + '/collect/channel/update/' + id, data);
+export const updateChannel = (id, data, type = 'collect') => {
+  return axios.post(`${config.api_prefix}/${type}/channel/update/${id}`, data);
 };
 
-export const deleteChannel = id => {
-  return axios.delete(config.api_prefix + '/collect/channel/del/' + id);
+export const deleteChannel = (id, type = 'collect') => {
+  return axios.delete(`${config.api_prefix}/${type}/channel/del/${id}`);
 };
