@@ -43,8 +43,8 @@ export const getToken = () => {
   return axios.get(config.api_prefix + '/common/getToken');
 };
 
-export const actList = (page = 1, pageSize = 20) => {
-  return axios.get(config.api_prefix + '/collect/activity/list', {
+export const actList = (page = 1, pageSize = 20, type = 'collect') => {
+  return axios.get(`${config.api_prefix}/${type}/activity/list`, {
     params: {
       page,
       pageSize
@@ -52,24 +52,24 @@ export const actList = (page = 1, pageSize = 20) => {
   });
 };
 
-export const getAct = id => {
-  return axios.get(config.api_prefix + '/collect/activity/get', {
+export const getAct = (id, type = 'collect') => {
+  return axios.get(`${config.api_prefix}/${type}/activity/get`, {
     params: {
       id
     }
   });
 };
 
-export const createAct = data => {
-  return axios.post(config.api_prefix + '/collect/create', data);
+export const createAct = (data, type = 'collect') => {
+  return axios.post(`${config.api_prefix}/${type}/create`, data);
 };
 
-export const updateAct = (id, data) => {
-  return axios.post(config.api_prefix + '/collect/update/' + id, data);
+export const updateAct = (id, data, type = 'collect') => {
+  return axios.post(`${config.api_prefix}/${type}/update/${id}`, data);
 };
 
-export const actUserList = (activity_id, page = 1, pageSize = 20) => {
-  return axios.get(config.api_prefix + '/collect/activity/user/list', {
+export const actUserList = (activity_id, page = 1, pageSize = 20, type = 'collect') => {
+  return axios.get(`${config.api_prefix}/${type}/activity/user/list`, {
     params: {
       activity_id,
       page,

@@ -14,11 +14,7 @@
     </el-table-column>
     <el-table-column fixed="right" label="操作">
       <template slot-scope="scope">
-        <router-link to="/enroll-config/123">修改配置</router-link>
-        <br/>
-        <router-link to="/enroll-link/123">链接管理</router-link>
-        <br/>
-        <router-link to="/enroll-info/123">报名信息</router-link>
+        <slot></slot>
       </template>
     </el-table-column>
   </el-table>
@@ -26,6 +22,6 @@
 <script>
 export default {
   props: ['list']
-}
+};
 </script>
 
