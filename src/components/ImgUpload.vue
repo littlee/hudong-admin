@@ -88,7 +88,9 @@ export default {
               AccessKeyId: accessKeyId,
               AccessKeySecret: accessKeySecret,
               SecurityToken: stsToken,
-              bucket
+              bucket,
+              key,
+              cdn
             } = res.data;
 
             let ossClient = new OSS.Wrapper({
@@ -99,13 +101,14 @@ export default {
               bucket
             });
 
-            let fileKey = getFileKey();
+            // let fileKey = getFileKey();
+            let fileKey = key;
 
             ossClient.multipartUpload(fileKey, file).then(ossRes => {
               this.uploading = false;
               this.$emit(
                 'input',
-                `http://${bucket}.${region}.aliyuncs.com/${fileKey}`
+                `${cdn}${key}`
               );
             });
           });
